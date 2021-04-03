@@ -32,6 +32,25 @@ weather-dashboard/
 >
 > This means 3 different endpoints with 3 different requirements too!
 
+---
+
+> **EDIT:** The UV Index endpoint MIGHT not work as it's getting deprecated- so it might mean they've moved to this API https://openweathermap.org/api/one-call-api for the UV index, where there's a UVI property.
+>
+> **This still required the query parameters for the lattitude and longitude just like the previous UV index endpoint**
+>
+> You can get the lattitude and longitude from the data given back from current weather endpoint:
+
+```json
+...
+  "coord": {
+    "lon": -122.08,
+    "lat": 37.39
+  },
+...
+```
+
+---
+
 ### Specific things for Homework 6:
 
 1. MUST submit a deployed live application URL
