@@ -5,7 +5,7 @@
 .pageTitle {
   padding: 2rem 1rem;
   margin-bottom: 2rem;
-  background-color: #e9ecef;
+  background-color: lightblue;
   border-radius: 0.3rem;
 }
 
@@ -25,12 +25,15 @@
   width: 150px;
 }
 
+.fiveDayTitle {
+  margin-left: 16%;
+}
+
 #fiveDayForecastCards {
   display: flex;
   margin-left: 16%;
 }
 
 .forecastDayCard {
-  display: flex;
   margin: 5px;
 }
