@@ -12,3 +12,10 @@
 .recentCities {
   width: 15%;
 }
+
+#recentlySelected {
+  display: flex;
+}
+
+#selectedCity {
+}
