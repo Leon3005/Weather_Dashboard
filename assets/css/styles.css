@@ -20,3 +20,17 @@
 /* #selectedCity {
   width: 100%;
 } */
+
+.weatherImage {
+  width: 150px;
+}
+
+#fiveDayForecastCards {
+  display: flex;
+  margin-left: 16%;
+}
+
+.forecastDayCard {
+  display: flex;
+  margin: 5px;
+}
