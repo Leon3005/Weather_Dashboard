@@ -13,10 +13,8 @@
     <link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-      <link
-      href="./assets/css/styles.css"
-      rel="stylesheet"
     />
+    <link href="./assets/css/styles.css" rel="stylesheet" />
     <title>Weather Dashboard</title>
   </head>
   <body>
@@ -25,18 +23,15 @@
         <h1>Weather Dashboard</h1>
       </div>
     </header>
-    <div class="container">
-      <div class="input-group rounded">
-        <input
-          type="search"
-          class="form-control rounded"
-          placeholder="Search"
-          aria-label="Search"
-          aria-describedby="search-addon"
-        />
-        <span class="input-group-text border-0" id="search-addon">
+    <div id="searchBar">
+      <h2>Enter a city:</h2>
+      <div class="input-group">
+        <div class="form-outline">
+          <input type="search" id="form1" class="form-control" />
+        </div>
+        <button type="button" class="btn btn-primary">
           <i class="fas fa-search"></i>
-        </span>
+        </button>
       </div>
     </div>
     <script
