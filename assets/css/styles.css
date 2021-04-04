@@ -13,9 +13,10 @@
   width: 15%;
 }
 
-#recentlySelected {
+#cardsContainer {
   display: flex;
 }
 
-#selectedCity {
-}
+/* #selectedCity {
+  width: 100%;
+} */
