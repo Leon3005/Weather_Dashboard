@@ -1,5 +1,5 @@
 const myUrl =
-  "http://api.openweathermap.org/data/2.5/forecast?id=524901&appid=a16cb7d329dca1d63027fe78612143ab";
+  "http://api.openweathermap.org/data/2.5/forecast?q=London&appid=a16cb7d329dca1d63027fe78612143ab";
 
 const functionForJSON = (responseObject) => {
   // unless you have some logic here do that before you return
