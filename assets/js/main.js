@@ -1,3 +1,5 @@
+const API_KEY = "a16cb7d329dca1d63027fe78612143ab";
+
 const renderCities = (citiesFromLocalStorage) => {
   // For each city construct a list item and append to the list group
 };
