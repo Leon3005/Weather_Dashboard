@@ -1,3 +1,5 @@
+$(document).ready(function () {});
+
 const API_KEY = "a16cb7d329dca1d63027fe78612143ab";
 
 const renderCities = (citiesFromLocalStorage) => {
@@ -93,11 +95,13 @@ const onSubmit = () => {
 };
 
 const onClick = () => {
+  let cityName = document.getElementById(`form1`).value;
+  console.log(cityName);
   // get city name from the list item that was clicked and store in variable called cityName
   // fetchAllWeatherData(cityName)
 };
 
-$("#target-your-list-items").click(onClick);
+$("#searchButton").click(onClick);
 
 $("#your-form-id").submit(onSubmit);
 
