@@ -1,6 +1,7 @@
 const API_KEY = "a16cb7d329dca1d63027fe78612143ab";
 let cityName = $(`#form1`).val();
 const weatherApiUrl = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${API_KEY}&units=metric`;
+let requestedData;
 
 const getCurrentData = (oneApiData) => {
   // from object extract the data points you need for the return data
@@ -14,44 +15,28 @@ const getCurrentData = (oneApiData) => {
     // uvIndex: 0,
   };
 };
-
-// const fetchAllWeatherData = (requestedCityName) => {
-//   // construct URL for http://api.openweathermap.org/data/2.5/weather?q={CITY_NAME}&appid={API_KEY} and store in variable called as weatherApiUrl
-//   let cityName = $(`#form1`).val();
-//   const weatherApiUrl = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${API_KEY}`;
-//   const functionForJSON = (responseObject) => {
-//     // unless you have some logic here do that before you return
-//     return responseObject.json();
-//   };
-
-//   const functionForApplication = (dataFromServer) => {
-//     let lat = dataFromServer.coord;
-//     console.log(lat);
-//   };
-
-//   fetch(weatherApiUrl)
-//     .then(functionForJSON)
-//     .then(functionForApplication)
-//     .catch(functionToHandleError);
-// };
+const renderCurrentWeather = (currentWeather) => {
+  $("#titleCity").text(`${currentWeather.name} - ${currentWeather.date}`);
+  console.log(currentWeather);
+};
 
 async function fetchAllWeatherData() {
   const response = await fetch(weatherApiUrl);
   const data = await response.json();
   let iconCode = data.weather[0].icon;
+  const date = new Date(data.dt * 1000).toLocaleDateString("en-gb");
   const icon = await fetch(
     `http://openweathermap.org/img/wn/${iconCode}@2x.png`
   );
-  console.log(icon.url);
-  const requestedData = {
+  requestedData = {
     name: data.name,
-    date: data.dt.toISOString(),
+    date: date,
     iconURL: `${icon.url}`,
-    temperature: "",
-    humidity: "",
-    windSpeed: "",
+    temperature: data.main.temp,
+    humidity: data.main.humidity,
+    windSpeed: data.wind.speed,
   };
-  console.log(requestedData);
+  renderCurrentWeather(requestedData);
 }
 
 // const functionForJSON = (responseObject) => {
