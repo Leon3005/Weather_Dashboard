@@ -1,37 +1,46 @@
 const API_KEY = "a16cb7d329dca1d63027fe78612143ab";
+let cityName = $(`#form1`).val();
+const weatherApiUrl = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${API_KEY}`;
 
-// const getCurrentData = (oneApiData) => {
-//   // from object extract the data points you need for the return data
-//   return {
-//     name: "",
-//     date: "",
-//     iconURL: "",
-//     temperature: "",
-//     humidity: "",
-//     windSpeed: "",
-//     uvIndex: 0,
+const getCurrentData = (oneApiData) => {
+  // from object extract the data points you need for the return data
+  return {
+    name: "",
+    date: "",
+    iconURL: "",
+    temperature: "",
+    humidity: "",
+    windSpeed: "",
+    // uvIndex: 0,
+  };
+};
+
+// const fetchAllWeatherData = (requestedCityName) => {
+//   // construct URL for http://api.openweathermap.org/data/2.5/weather?q={CITY_NAME}&appid={API_KEY} and store in variable called as weatherApiUrl
+//   let cityName = $(`#form1`).val();
+//   const weatherApiUrl = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${API_KEY}`;
+//   const functionForJSON = (responseObject) => {
+//     // unless you have some logic here do that before you return
+//     return responseObject.json();
 //   };
+
+//   const functionForApplication = (dataFromServer) => {
+//     let lat = dataFromServer.coord;
+//     console.log(lat);
+//   };
+
+//   fetch(weatherApiUrl)
+//     .then(functionForJSON)
+//     .then(functionForApplication)
+//     .catch(functionToHandleError);
 // };
 
-const fetchAllWeatherData = (requestedCityName) => {
-  // construct URL for http://api.openweathermap.org/data/2.5/weather?q={CITY_NAME}&appid={API_KEY} and store in variable called as weatherApiUrl
-  let cityName = $(`#form1`).val();
-  const weatherApiUrl = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${API_KEY}`;
-  const functionForJSON = (responseObject) => {
-    // unless you have some logic here do that before you return
-    return responseObject.json();
-  };
-
-  const functionForApplication = (dataFromServer) => {
-    let lat = dataFromServer.coord;
-    console.log(lat);
-  };
-
-  fetch(weatherApiUrl)
-    .then(functionForJSON)
-    .then(functionForApplication)
-    .catch(functionToHandleError);
-};
+async function fetchAllWeatherData() {
+  const response = await fetch(weatherApiUrl);
+  const data = await response.json();
+  const requestedData = data.coord;
+  console.log(requestedData);
+}
 
 // const functionForJSON = (responseObject) => {
 //   // unless you have some logic here do that before you return
