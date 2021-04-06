@@ -38,7 +38,15 @@ const getCurrentData = (oneApiData) => {
 async function fetchAllWeatherData() {
   const response = await fetch(weatherApiUrl);
   const data = await response.json();
-  const requestedData = data.coord;
+  console.log(data);
+  const requestedData = {
+    name: data.name,
+    date: (data.dt).toISOString(),
+    iconURL: ,
+    temperature: "",
+    humidity: "",
+    windSpeed: "",
+  };
   console.log(requestedData);
 }
 
