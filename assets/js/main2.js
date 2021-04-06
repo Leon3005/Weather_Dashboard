@@ -53,4 +53,5 @@ const onClick = () => {
   // fetchAllWeatherData(cityName)
 };
 
+// Run onClick function when button is clicked
 $("#searchButton").click(onClick);
