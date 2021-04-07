@@ -3,6 +3,8 @@ let cityName = $(`#form1`).val();
 const weatherApiUrl = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${API_KEY}&units=metric`;
 let requestedData;
 
+const storeRecentCity = () => {};
+
 const getCurrentData = (oneApiData) => {
   // from object extract the data points you need for the return data
   return {
@@ -16,10 +18,13 @@ const getCurrentData = (oneApiData) => {
   };
 };
 const renderCurrentWeather = (currentWeather) => {
-  $("#titleCity").text(`${currentWeather.name} - ${currentWeather.date}`);
+  $("#titleCity").append(
+    `${currentWeather.name} - ${currentWeather.date} <span><img id="iconTitle" class="titleImage" /></span>`
+  );
   $("#temp").text(`Temperature: ${currentWeather.temperature}°C`);
   $("#humidity").text(`Humidity: ${currentWeather.humidity}%`);
   $("#windSpeed").text(`Wind Speed: ${currentWeather.windSpeed} mph`);
+  $("#iconTitle").attr("src", `${currentWeather.iconURL}`);
 };
 
 async function fetchAllWeatherData() {
