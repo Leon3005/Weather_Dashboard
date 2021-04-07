@@ -1,12 +1,16 @@
 const API_KEY = "a16cb7d329dca1d63027fe78612143ab";
 let requestedData;
-
 let storedCity = JSON.parse(localStorage.getItem(`cityInput`) || "[]");
+
 const storedCityData = () => {
   let cityName = $(`#form1`).val();
   storedCity.push(cityName);
   //Don't forget to stringify
   localStorage.setItem(`recentCities`, JSON.stringify(storedCity));
+};
+
+const renderRecentCities = () => {
+  console.log(storedCity);
 };
 
 const renderCurrentWeather = (currentWeather) => {
@@ -59,6 +63,7 @@ const onClick = () => {
   fetchAllWeatherData();
   let cityName = $(`#form1`).val();
   storedCityData();
+  renderRecentCities();
   // get city name from the list item that was clicked and store in variable called cityName
   // fetchAllWeatherData(cityName)
 };
