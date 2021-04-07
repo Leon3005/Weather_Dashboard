@@ -5,19 +5,10 @@ let requestedData;
 
 const storeRecentCity = () => {};
 
-const getCurrentData = (oneApiData) => {
-  // from object extract the data points you need for the return data
-  return {
-    name: "",
-    date: "",
-    iconURL: "",
-    temperature: "",
-    humidity: "",
-    windSpeed: "",
-    // uvIndex: 0,
-  };
-};
 const renderCurrentWeather = (currentWeather) => {
+  let cityName = $(`#form1`).val();
+  console.log(cityName);
+  // $("#titleCity").text("");
   $("#titleCity").text(`${currentWeather.name} - ${currentWeather.date}`);
   // <span><img id="iconTitle" class="titleImage" /></span>
   $("#iconTitle").attr("src", `${currentWeather.iconURL}`);
@@ -58,10 +49,8 @@ async function fetchAllWeatherData() {
 //   .catch(functionToHandleError)
 
 const onClick = () => {
-  let cityName = $(`#form1`).val();
-  $("#titleCity").innerHTML = "";
   fetchAllWeatherData();
-  console.log(cityName);
+  let cityName = $(`#form1`).val();
   // get city name from the list item that was clicked and store in variable called cityName
   // fetchAllWeatherData(cityName)
 };
