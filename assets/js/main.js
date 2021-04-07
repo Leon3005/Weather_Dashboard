@@ -2,19 +2,18 @@ const API_KEY = "a16cb7d329dca1d63027fe78612143ab";
 let requestedData;
 
 const storedCityData = () => {
-  let cityName = $(`#form1`).val();
-  let storedCity = JSON.parse(localStorage.getItem(`${cityName}`) || "[]");
-  // for (let i = 0; i < 5; i++) {
-  const pushToArray = () => {
-    let cityName = $(`#form1`).val();
-    storedCity.push(cityName);
-  };
-  const saveCity = () => {
-    localStorage.setItem(`recentCity`, storedCity);
-  };
-  pushToArray();
-  saveCity();
-  // }
+  for (let i = 0; i < 5; i++) {
+    let storedCity = JSON.parse(localStorage.getItem(`cityInput`) || "[]");
+    const pushToArray = () => {
+      let cityName = $(`#form1`).val();
+      storedCity.push(cityName);
+    };
+    const saveCity = () => {
+      localStorage.setItem(`recentCity${i}`, storedCity);
+    };
+    pushToArray();
+    saveCity();
+  }
 };
 
 const renderCurrentWeather = (currentWeather) => {
