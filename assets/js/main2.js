@@ -1,6 +1,4 @@
 const API_KEY = "a16cb7d329dca1d63027fe78612143ab";
-let cityName = $(`#form1`).val();
-const weatherApiUrl = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${API_KEY}&units=metric`;
 let requestedData;
 
 const storeRecentCity = () => {};
@@ -18,6 +16,8 @@ const renderCurrentWeather = (currentWeather) => {
 };
 
 async function fetchAllWeatherData() {
+  let cityName = $(`#form1`).val();
+  const weatherApiUrl = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${API_KEY}&units=metric`;
   const response = await fetch(weatherApiUrl);
   const data = await response.json();
   let iconCode = data.weather[0].icon;
@@ -33,6 +33,7 @@ async function fetchAllWeatherData() {
     humidity: data.main.humidity,
     windSpeed: data.wind.speed,
   };
+  console.log(requestedData);
   renderCurrentWeather(requestedData);
 }
 
