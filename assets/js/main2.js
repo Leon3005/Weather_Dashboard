@@ -17,7 +17,7 @@ const getCurrentData = (oneApiData) => {
 };
 const renderCurrentWeather = (currentWeather) => {
   $("#titleCity").text(`${currentWeather.name} - ${currentWeather.date}`);
-  console.log(currentWeather);
+  $("#temp").text(`Temperature: ${currentWeather.temperature}°C`);
 };
 
 async function fetchAllWeatherData() {
@@ -53,7 +53,6 @@ async function fetchAllWeatherData() {
 
 const onClick = () => {
   let cityName = $(`#form1`).val();
-  console.log(cityName);
   fetchAllWeatherData();
   // get city name from the list item that was clicked and store in variable called cityName
   // fetchAllWeatherData(cityName)
