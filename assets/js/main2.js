@@ -18,6 +18,8 @@ const getCurrentData = (oneApiData) => {
 const renderCurrentWeather = (currentWeather) => {
   $("#titleCity").text(`${currentWeather.name} - ${currentWeather.date}`);
   $("#temp").text(`Temperature: ${currentWeather.temperature}°C`);
+  $("#humidity").text(`Humidity: ${currentWeather.humidity}%`);
+  $("#windSpeed").text(`Wind Speed: ${currentWeather.windSpeed} mph`);
 };
 
 async function fetchAllWeatherData() {
