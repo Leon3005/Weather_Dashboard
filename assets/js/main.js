@@ -3,6 +3,7 @@ let requestedData;
 let storedCity = JSON.parse(localStorage.getItem(`recentCities`) || "[]");
 $(document).ready(function () {
   renderRecentCities();
+  $("#titleCity").append(`<h3>Waiting for city...</h3>`);
 });
 
 const storedCityData = () => {
@@ -32,7 +33,7 @@ const renderCurrentWeather = (currentWeather) => {
   console.log(cityName);
   // $("#titleCity").text("");
   $("#titleCity").append(
-    `<h3>${currentWeather.name} - ${currentWeather.date}<span><img src=${currentWeather.iconURL}/></span></h3>`
+    `<h3>${currentWeather.name} - ${currentWeather.date}<span><img src="${currentWeather.iconURL}"/></span></h3>`
   );
   // <span><img id="iconTitle" class="titleImage" /></span>
   $("#iconTitle").attr("src", `${currentWeather.iconURL}`);
