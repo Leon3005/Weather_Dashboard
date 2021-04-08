@@ -31,7 +31,9 @@ const renderCurrentWeather = (currentWeather) => {
   let cityName = $(`#form1`).val();
   console.log(cityName);
   // $("#titleCity").text("");
-  $("#titleCity").text(`${currentWeather.name} - ${currentWeather.date}`);
+  $("#titleCity").append(
+    `<h3>${currentWeather.name} - ${currentWeather.date}<span><img src=${currentWeather.iconURL}/></span></h3>`
+  );
   // <span><img id="iconTitle" class="titleImage" /></span>
   $("#iconTitle").attr("src", `${currentWeather.iconURL}`);
   $("#temp").text(`Temperature: ${currentWeather.temperature}°C`);
