@@ -32,7 +32,7 @@ const renderCurrentWeather = (currentWeather) => {
   let cityName = $(`#form1`).val();
   console.log(cityName);
   // $("#titleCity").text("");
-  $("#titleCity").append(
+  $("#titleCity").replaceWith(
     `<h3>${currentWeather.name} - ${currentWeather.date}<span><img src="${currentWeather.iconURL}"/></span></h3>`
   );
   // <span><img id="iconTitle" class="titleImage" /></span>
