@@ -9,9 +9,10 @@ const storedCityData = () => {
   let cityName = $(`#form1`).val();
   storedCity.push(cityName);
   //Don't forget to stringify
-  localStorage.setItem(`recentCities`, JSON.stringify(storedCity));
-  if (storedCity.length > 5) {
-    storedCity.splice(0, 5);
+  if (storedCity.length < 6) {
+    localStorage.setItem(`recentCities`, JSON.stringify(storedCity));
+  } else {
+    console.log("full!");
   }
   console.log(storedCity);
 };
@@ -19,7 +20,7 @@ const storedCityData = () => {
 const renderRecentCities = () => {
   for (let i = 0; i < storedCity.length; i++) {
     $("#recentCities").append(`
-<li class="list-group-item active" aria-current="true">
+<li class="list-group-item" aria-current="true">
 ${storedCity[i]}
 </li>
 `);
