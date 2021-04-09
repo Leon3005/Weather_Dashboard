@@ -9,10 +9,11 @@ $(document).ready(function () {
 const storedCityData = () => {
   let cityName = $(`#form1`).val();
   storedCity.push(cityName);
-  //Don't forget to stringify
   if (storedCity.length < 6) {
     localStorage.setItem(`recentCities`, JSON.stringify(storedCity));
   } else {
+    storedCity.shift();
+    localStorage.setItem(`recentCities`, JSON.stringify(storedCity));
     console.log("full!");
   }
   console.log(storedCity);
