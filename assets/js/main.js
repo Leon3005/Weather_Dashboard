@@ -1,5 +1,6 @@
 const API_KEY = "a16cb7d329dca1d63027fe78612143ab";
 let requestedData;
+let oneCallData;
 let storedCity = JSON.parse(localStorage.getItem(`recentCities`) || "[]");
 $(document).ready(function () {
   renderRecentCities();
@@ -85,6 +86,8 @@ async function fetchAllWeatherData() {
   const oneCallApiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${requestedData.lat}&lon=${requestedData.lon}&exclude=hourly,minutely&appid=${API_KEY}`;
   const oneCallResponse = await fetch(oneCallApiUrl);
   const oneCallData = await oneCallResponse.json();
+
+  console.log(oneCallData);
   console.log(requestedData);
   renderCurrentWeather(requestedData);
 }
