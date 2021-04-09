@@ -46,8 +46,8 @@ const renderCurrentWeather = (currentWeather, currentOneCall) => {
 
 const constructFiveDay = (currentWeather) => {
   for (let index = 0; index < 5; index++) {
-    $("#fiveDayForecastCards")
-      .append(`<div class="card forecastDayCard" style="width: 15rem">
+    $("#fiveDayConstruction")
+      .replaceWith(`<div id="fiveDayConstruction"><div class="card forecastDayCard" style="width: 15rem">
     <img
       src="./assets/images/sun.png"
       class="card-img-top weatherImage mx-auto"
@@ -60,7 +60,7 @@ const constructFiveDay = (currentWeather) => {
         the card's content.
       </p>
     </div>
-  </div>`);
+  </div></div>`);
   }
 };
 
@@ -93,13 +93,13 @@ async function fetchAllWeatherData() {
   console.log(oneCallData);
   console.log(requestedData);
   renderCurrentWeather(requestedData, oneCallRequestedData);
+  constructFiveDay();
 }
 
 const onClick = () => {
   fetchAllWeatherData();
   let cityName = $(`#form1`).val();
   storedCityData();
-  constructFiveDay();
 };
 
 // Run onClick function when button is clicked
