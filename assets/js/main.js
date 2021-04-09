@@ -46,8 +46,8 @@ const renderCurrentWeather = (currentWeather, currentOneCall) => {
 
 const constructFiveDay = (currentWeather) => {
   for (let index = 0; index < 5; index++) {
-    $("#fiveDayConstruction")
-      .replaceWith(`<div id="fiveDayConstruction"><div class="card forecastDayCard" style="width: 15rem">
+    $("#fiveDayForecastCards")
+      .append(`<div id="fiveDayConstruction"><div class="card forecastDayCard" style="width: 15rem">
     <img
       src="./assets/images/sun.png"
       class="card-img-top weatherImage mx-auto"
@@ -62,6 +62,7 @@ const constructFiveDay = (currentWeather) => {
     </div>
   </div></div>`);
   }
+  $("#fiveDayConstruction").remove();
 };
 
 async function fetchAllWeatherData() {
