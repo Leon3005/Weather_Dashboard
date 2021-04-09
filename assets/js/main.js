@@ -3,7 +3,7 @@ let requestedData;
 let storedCity = JSON.parse(localStorage.getItem(`recentCities`) || "[]");
 $(document).ready(function () {
   renderRecentCities();
-  $("#titleCity").append(`<h3>Waiting for city...</h3>`);
+  $("#renderedCityName").append(`<h3>Waiting for city...</h3>`);
 });
 
 const storedCityData = () => {
@@ -32,15 +32,14 @@ ${storedCity[i]}
 const renderCurrentWeather = (currentWeather) => {
   let cityName = $(`#form1`).val();
   console.log(cityName);
-  // $("#titleCity").text("");
-  $("#titleCity").replaceWith(
-    `<h3>${currentWeather.name} - ${currentWeather.date}<span><img src="${currentWeather.iconURL}"/></span></h3>`
+  $("#renderedCityName").replaceWith(
+    `<h3 id="renderedCityName">${currentWeather.name} - ${currentWeather.date}<span><img src="${currentWeather.iconURL}"/></span></h3>`
   );
-  // <span><img id="iconTitle" class="titleImage" /></span>
   $("#iconTitle").attr("src", `${currentWeather.iconURL}`);
   $("#temp").text(`Temperature: ${currentWeather.temperature}°C`);
   $("#humidity").text(`Humidity: ${currentWeather.humidity}%`);
   $("#windSpeed").text(`Wind Speed: ${currentWeather.windSpeed} mph`);
+  console.log(currentWeather.name);
 };
 
 async function fetchAllWeatherData() {
