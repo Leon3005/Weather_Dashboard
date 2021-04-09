@@ -42,7 +42,7 @@ const renderCurrentWeather = (currentWeather) => {
   console.log(currentWeather.name);
 };
 
-const constructFiveDay = () => {
+const constructFiveDay = (currentWeather) => {
   for (let index = 0; index < 5; index++) {
     $("#fiveDayForecastCards")
       .append(`<div class="card forecastDayCard" style="width: 15rem">
@@ -65,7 +65,6 @@ const constructFiveDay = () => {
 async function fetchAllWeatherData() {
   let cityName = $(`#form1`).val();
   const weatherApiUrl = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${API_KEY}&units=metric`;
-  const oneCallApiIrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely&appid=${API_KEY}`;
   const response = await fetch(weatherApiUrl);
   const data = await response.json();
   let iconCode = data.weather[0].icon;
@@ -80,7 +79,12 @@ async function fetchAllWeatherData() {
     temperature: data.main.temp,
     humidity: data.main.humidity,
     windSpeed: data.wind.speed,
+    lon: data.coord.lon,
+    lat: data.coord.lat,
   };
+  const oneCallApiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${requestedData.lat}&lon=${requestedData.lon}&exclude=hourly,minutely&appid=${API_KEY}`;
+  const oneCallResponse = await fetch(oneCallApiUrl);
+  const oneCallData = await oneCallResponse.json();
   console.log(requestedData);
   renderCurrentWeather(requestedData);
 }
