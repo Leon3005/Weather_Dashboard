@@ -42,9 +42,30 @@ const renderCurrentWeather = (currentWeather) => {
   console.log(currentWeather.name);
 };
 
+const constructFiveDay = () => {
+  for (let index = 0; index < 5; index++) {
+    $("#fiveDayForecastCards")
+      .append(`<div class="card forecastDayCard" style="width: 15rem">
+    <img
+      src="./assets/images/sun.png"
+      class="card-img-top weatherImage mx-auto"
+      alt="..."
+    />
+    <div class="card-body">
+      <h5 class="card-title">Date</h5>
+      <p class="card-text">
+        Some quick example text to build on the Date and make up the bulk of
+        the card's content.
+      </p>
+    </div>
+  </div>`);
+  }
+};
+
 async function fetchAllWeatherData() {
   let cityName = $(`#form1`).val();
   const weatherApiUrl = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${API_KEY}&units=metric`;
+  const oneCallApiIrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely&appid=${API_KEY}`;
   const response = await fetch(weatherApiUrl);
   const data = await response.json();
   let iconCode = data.weather[0].icon;
@@ -64,24 +85,11 @@ async function fetchAllWeatherData() {
   renderCurrentWeather(requestedData);
 }
 
-// const functionForJSON = (responseObject) => {
-//   // unless you have some logic here do that before you return
-//   return responseObject.json()
-//   }const functionForApplication = (dataFromServer) => {
-//   // whatever your application code is goes here
-//   }const functionToHandleError = (errorObject) => {
-//   // handle your error here according to your application
-//   }fetch(myUrl)
-//   .then(functionForJSON)
-//   .then(functionForApplication)
-//   .catch(functionToHandleError)
-
 const onClick = () => {
   fetchAllWeatherData();
   let cityName = $(`#form1`).val();
   storedCityData();
-  // get city name from the list item that was clicked and store in variable called cityName
-  // fetchAllWeatherData(cityName)
+  constructFiveDay();
 };
 
 // Run onClick function when button is clicked
