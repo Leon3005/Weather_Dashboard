@@ -55,8 +55,7 @@ const constructFiveDay = (currentOneCall) => {
     <div class="card-body">
       <h5 class="card-title">${currentOneCall.dateOneCall}</h5>
       <p class="card-text">
-        Some quick example text to build on the Date and make up the bulk of
-        the card's content.
+        Temperature: ${currentOneCall.temp}
       </p>
     </div>
   </div></div>`);
@@ -93,6 +92,7 @@ async function fetchAllWeatherData() {
     uvi: oneCallData.current.uvi,
     iconOneCall: `${icon.url}`,
     dateOneCall: convertOneCallDate,
+    temp: oneCallData.daily[1].temp.day,
   };
   console.log(oneCallData);
   console.log(requestedData);
