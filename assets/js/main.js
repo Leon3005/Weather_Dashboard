@@ -39,10 +39,20 @@ const renderCurrentWeather = (currentWeather, currentOneCall) => {
   $("#humidity").text(`Humidity: ${currentWeather.humidity}%`);
   $("#windSpeed").text(`Wind Speed: ${currentWeather.windSpeed} mph`);
   $("#uvIndex").text(`UV Index: ${currentOneCall.uvi}`);
+  if (currentOneCall.uvi >= 8) {
+    $("#uvIndex").addClass("bg-danger");
+  } else if (currentOneCall.uvi >= 6) {
+    $("#uvIndex").addClass("bg-warning");
+  } else if (currentOneCall.uvi >= 3) {
+    $("#uvIndex").addClass("bg-primary");
+  } else if (currentOneCall.uvi >= 0) {
+    $("#uvIndex").addClass("bg-success");
+  }
+  console.log(currentOneCall.uvi);
 };
 
 const constructFiveDay = (currentOneCall) => {
-  for (let index = 0; index < 6; index++) {
+  for (let index = 1; index < 6; index++) {
     $("#fiveDayForecastCards")
       .append(`<div class="fiveDayConstruction"><div class="card forecastDayCard" style="width: 15rem">
     <img
