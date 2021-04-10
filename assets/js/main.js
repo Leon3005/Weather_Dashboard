@@ -45,9 +45,9 @@ const renderCurrentWeather = (currentWeather, currentOneCall) => {
 };
 
 const constructFiveDay = (currentWeather) => {
-  for (let index = 0; index < 5; index++) {
+  for (let index = 0; index < 6; index++) {
     $("#fiveDayForecastCards")
-      .append(`<div id="fiveDayConstruction"><div class="card forecastDayCard" style="width: 15rem">
+      .append(`<div class="fiveDayConstruction"><div class="card forecastDayCard" style="width: 15rem">
     <img
       src="./assets/images/sun.png"
       class="card-img-top weatherImage mx-auto"
@@ -62,7 +62,6 @@ const constructFiveDay = (currentWeather) => {
     </div>
   </div></div>`);
   }
-  $("#fiveDayConstruction").remove();
 };
 
 async function fetchAllWeatherData() {
@@ -100,6 +99,7 @@ async function fetchAllWeatherData() {
 const onClick = () => {
   fetchAllWeatherData();
   let cityName = $(`#form1`).val();
+  $(".fiveDayConstruction").remove();
   storedCityData();
 };
 
