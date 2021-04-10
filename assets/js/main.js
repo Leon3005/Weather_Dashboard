@@ -17,7 +17,6 @@ const storedCityData = () => {
     localStorage.setItem(`recentCities`, JSON.stringify(storedCity));
     console.log("full!");
   }
-  console.log(storedCity);
 };
 
 const renderRecentCities = () => {
@@ -32,7 +31,6 @@ ${storedCity[i]}
 
 const renderCurrentWeather = (currentWeather, currentOneCall) => {
   let cityName = $(`#form1`).val();
-  console.log(cityName);
   $("#renderedCityName").replaceWith(
     `<h3 id="renderedCityName">${currentWeather.name} - ${currentWeather.date}<span><img src="${currentWeather.iconURL}"/></span></h3>`
   );
@@ -41,27 +39,27 @@ const renderCurrentWeather = (currentWeather, currentOneCall) => {
   $("#humidity").text(`Humidity: ${currentWeather.humidity}%`);
   $("#windSpeed").text(`Wind Speed: ${currentWeather.windSpeed} mph`);
   $("#uvIndex").text(`UV Index: ${currentOneCall.uvi}`);
-  console.log(currentWeather.name);
 };
 
 const constructFiveDay = (currentOneCall) => {
-  console.log(currentOneCall);
   for (let index = 0; index < 6; index++) {
     $("#fiveDayForecastCards")
       .append(`<div class="fiveDayConstruction"><div class="card forecastDayCard" style="width: 15rem">
     <img
-      src="${currentOneCall.iconOneCall}"
+      src="http://openweathermap.org/img/wn/${
+        currentOneCall.daily[index].weather[0].icon
+      }@2x.png"
       class="card-img-top weatherImage mx-auto"
     />
     <div class="card-body">
       <h5 class="card-title">${new Date(
-        currentOneCall.temp[index].dt * 1000
+        currentOneCall.daily[index].dt * 1000
       ).toLocaleDateString("en-gb")}</h5>
       <p class="card-text">
-        Temperature: ${currentOneCall.daily[index].temp.day}
+        Temperature: ${currentOneCall.daily[index].temp.day}°C
       </p>
       <p class="card-text">
-      Humidity: ${currentOneCall.daily[index].temp.day}
+      Humidity: ${currentOneCall.daily[index].humidity}%
     </p>
     </div>
   </div></div>`);
@@ -93,11 +91,8 @@ async function fetchAllWeatherData() {
   const oneCallData = await oneCallResponse.json();
   oneCallRequestedData = {
     uvi: oneCallData.current.uvi,
-    iconOneCall: `${icon.url}`,
     daily: oneCallData.daily,
   };
-  console.log(oneCallData);
-  console.log(requestedData);
   renderCurrentWeather(requestedData, oneCallRequestedData);
   constructFiveDay(oneCallRequestedData);
 }
