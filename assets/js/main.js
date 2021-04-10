@@ -22,7 +22,7 @@ const storedCityData = () => {
 const renderRecentCities = () => {
   for (let i = 0; i < storedCity.length; i++) {
     $("#recentCities").append(`
-<li class="list-group-item" aria-current="true">
+<li class="list-group-item storedCities" aria-current="true">
 ${storedCity[i]}
 </li>
 `);
