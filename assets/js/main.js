@@ -44,17 +44,16 @@ const renderCurrentWeather = (currentWeather, currentOneCall) => {
   console.log(currentWeather.name);
 };
 
-const constructFiveDay = (currentWeather) => {
+const constructFiveDay = (currentOneCall) => {
   for (let index = 0; index < 6; index++) {
     $("#fiveDayForecastCards")
       .append(`<div class="fiveDayConstruction"><div class="card forecastDayCard" style="width: 15rem">
     <img
-      src="./assets/images/sun.png"
+      src="${currentOneCall.iconOneCall}"
       class="card-img-top weatherImage mx-auto"
-      alt="..."
     />
     <div class="card-body">
-      <h5 class="card-title">Date</h5>
+      <h5 class="card-title">${currentOneCall.dateOneCall}</h5>
       <p class="card-text">
         Some quick example text to build on the Date and make up the bulk of
         the card's content.
@@ -84,16 +83,21 @@ async function fetchAllWeatherData() {
     lon: data.coord.lon,
     lat: data.coord.lat,
   };
-  const oneCallApiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${requestedData.lat}&lon=${requestedData.lon}&exclude=hourly,minutely&appid=${API_KEY}`;
+  const oneCallApiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${requestedData.lat}&lon=${requestedData.lon}&exclude=hourly,minutely&appid=${API_KEY}&units=metric`;
   const oneCallResponse = await fetch(oneCallApiUrl);
   const oneCallData = await oneCallResponse.json();
+  const convertOneCallDate = new Date(
+    oneCallData.daily[1].dt * 1000
+  ).toLocaleDateString("en-gb");
   oneCallRequestedData = {
     uvi: oneCallData.current.uvi,
+    iconOneCall: `${icon.url}`,
+    dateOneCall: convertOneCallDate,
   };
   console.log(oneCallData);
   console.log(requestedData);
   renderCurrentWeather(requestedData, oneCallRequestedData);
-  constructFiveDay();
+  constructFiveDay(oneCallRequestedData);
 }
 
 const onClick = () => {
