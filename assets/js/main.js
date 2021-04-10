@@ -45,6 +45,7 @@ const renderCurrentWeather = (currentWeather, currentOneCall) => {
 };
 
 const constructFiveDay = (currentOneCall) => {
+  console.log(currentOneCall);
   for (let index = 0; index < 6; index++) {
     $("#fiveDayForecastCards")
       .append(`<div class="fiveDayConstruction"><div class="card forecastDayCard" style="width: 15rem">
@@ -53,10 +54,15 @@ const constructFiveDay = (currentOneCall) => {
       class="card-img-top weatherImage mx-auto"
     />
     <div class="card-body">
-      <h5 class="card-title">${currentOneCall.dateOneCall}</h5>
+      <h5 class="card-title">${new Date(
+        currentOneCall.temp[index].dt * 1000
+      ).toLocaleDateString("en-gb")}</h5>
       <p class="card-text">
-        Temperature: ${currentOneCall.temp}
+        Temperature: ${currentOneCall.daily[index].temp.day}
       </p>
+      <p class="card-text">
+      Humidity: ${currentOneCall.daily[index].temp.day}
+    </p>
     </div>
   </div></div>`);
   }
@@ -85,14 +91,10 @@ async function fetchAllWeatherData() {
   const oneCallApiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${requestedData.lat}&lon=${requestedData.lon}&exclude=hourly,minutely&appid=${API_KEY}&units=metric`;
   const oneCallResponse = await fetch(oneCallApiUrl);
   const oneCallData = await oneCallResponse.json();
-  const convertOneCallDate = new Date(
-    oneCallData.daily[1].dt * 1000
-  ).toLocaleDateString("en-gb");
   oneCallRequestedData = {
     uvi: oneCallData.current.uvi,
     iconOneCall: `${icon.url}`,
-    dateOneCall: convertOneCallDate,
-    temp: oneCallData.daily[1].temp.day,
+    daily: oneCallData.daily,
   };
   console.log(oneCallData);
   console.log(requestedData);
