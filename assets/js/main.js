@@ -125,8 +125,8 @@ let cityName = $(`#form1`).val();
 
 // Functions that will be ran on click.
 const onClick = () => {
-  fetchAllWeatherData(cityName);
   let cityName = $(`#form1`).val();
+  fetchAllWeatherData(cityName);
   $(".fiveDayConstruction").remove();
   storedCityData();
   renderRecentCities();
