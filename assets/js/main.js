@@ -20,13 +20,18 @@ const storedCityData = () => {
 };
 
 const renderRecentCities = () => {
+  $(".searched-cities").empty();
+  const ul = $("<ul>").addClass("list-group recentCities");
   for (let i = 0; i < storedCity.length; i++) {
-    $("#recentCities").append(`
+    // const recentCitiesLi = $("#recentCities li");
+    // $("#recentCities").removeChildren(recentCitiesLi);
+    ul.append(`
 <li class="list-group-item storedCities" aria-current="true">
 ${storedCity[i]}
 </li>
 `);
   }
+  $(".searched-cities").append(ul);
 };
 
 const renderCurrentWeather = (currentWeather, currentOneCall) => {
@@ -112,6 +117,7 @@ const onClick = () => {
   let cityName = $(`#form1`).val();
   $(".fiveDayConstruction").remove();
   storedCityData();
+  renderRecentCities();
 };
 
 // Run onClick function when button is clicked
