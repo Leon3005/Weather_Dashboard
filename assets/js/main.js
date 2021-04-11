@@ -1,12 +1,15 @@
+// This is the API key for the current weather data.
 const API_KEY = "a16cb7d329dca1d63027fe78612143ab";
 let requestedData;
 let oneCallRequestedData;
+//Allowing cities to be used from localStorage
 let storedCity = JSON.parse(localStorage.getItem(`recentCities`) || "[]");
 $(document).ready(function () {
   renderRecentCities();
   $("#renderedCityName").append(`<h3>Waiting for city...</h3>`);
 });
 
+//This function will delete the oldest entry of recent cities in localstorage.
 const storedCityData = () => {
   let cityName = $(`#form1`).val();
   storedCity.push(cityName);
@@ -18,11 +21,13 @@ const storedCityData = () => {
   }
 };
 
+// This allows you to display city data after clicking a recent city.
 const handleRecentSearch = (event) => {
   let cityName = event.target.innerText;
   fetchAllWeatherData(cityName);
 };
 
+// This function renders the recently searched cities from localstorage.
 const renderRecentCities = () => {
   $(".searched-cities").empty();
   const ul = $("<ul>").addClass("list-group recentCities");
@@ -37,6 +42,7 @@ ${storedCity[i]}
   ul.on("click", handleRecentSearch);
 };
 
+//This function renders the current weather dependant on the city that has been searched. The If statement changes UV index colour based on the danger.
 const renderCurrentWeather = (currentWeather, currentOneCall) => {
   let cityName = $(`#form1`).val();
   $("#renderedCityName").replaceWith(
@@ -58,6 +64,7 @@ const renderCurrentWeather = (currentWeather, currentOneCall) => {
   }
 };
 
+//This function constructs the five day forecast using a different API to the one above. It uses the OneCall API and uses a for loop to go through the array of days.
 const constructFiveDay = (currentOneCall) => {
   for (let index = 1; index < 6; index++) {
     $("#fiveDayForecastCards")
@@ -83,6 +90,7 @@ const constructFiveDay = (currentOneCall) => {
   }
 };
 
+//This function includes the fetch functions for the current weather API and the OneCall API. They both feature dynamic parameters based on user input.The date is also converted here to a readable format.
 async function fetchAllWeatherData(cityName) {
   const weatherApiUrl = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${API_KEY}&units=metric`;
   const response = await fetch(weatherApiUrl);
@@ -115,6 +123,7 @@ async function fetchAllWeatherData(cityName) {
 
 let cityName = $(`#form1`).val();
 
+// Functions that will be ran on click.
 const onClick = () => {
   fetchAllWeatherData(cityName);
   let cityName = $(`#form1`).val();
