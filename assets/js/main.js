@@ -15,16 +15,18 @@ const storedCityData = () => {
   } else {
     storedCity.shift();
     localStorage.setItem(`recentCities`, JSON.stringify(storedCity));
-    console.log("full!");
   }
+};
+
+const handleRecentSearch = (event) => {
+  let cityName = event.target.innerText;
+  fetchAllWeatherData(cityName);
 };
 
 const renderRecentCities = () => {
   $(".searched-cities").empty();
   const ul = $("<ul>").addClass("list-group recentCities");
   for (let i = 0; i < storedCity.length; i++) {
-    // const recentCitiesLi = $("#recentCities li");
-    // $("#recentCities").removeChildren(recentCitiesLi);
     ul.append(`
 <li class="list-group-item storedCities" aria-current="true">
 ${storedCity[i]}
@@ -32,6 +34,7 @@ ${storedCity[i]}
 `);
   }
   $(".searched-cities").append(ul);
+  ul.on("click", handleRecentSearch);
 };
 
 const renderCurrentWeather = (currentWeather, currentOneCall) => {
@@ -53,7 +56,6 @@ const renderCurrentWeather = (currentWeather, currentOneCall) => {
   } else if (currentOneCall.uvi >= 0) {
     $("#uvIndex").addClass("bg-success");
   }
-  console.log(currentOneCall.uvi);
 };
 
 const constructFiveDay = (currentOneCall) => {
@@ -81,8 +83,7 @@ const constructFiveDay = (currentOneCall) => {
   }
 };
 
-async function fetchAllWeatherData() {
-  let cityName = $(`#form1`).val();
+async function fetchAllWeatherData(cityName) {
   const weatherApiUrl = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${API_KEY}&units=metric`;
   const response = await fetch(weatherApiUrl);
   const data = await response.json();
@@ -112,8 +113,10 @@ async function fetchAllWeatherData() {
   constructFiveDay(oneCallRequestedData);
 }
 
+let cityName = $(`#form1`).val();
+
 const onClick = () => {
-  fetchAllWeatherData();
+  fetchAllWeatherData(cityName);
   let cityName = $(`#form1`).val();
   $(".fiveDayConstruction").remove();
   storedCityData();
