@@ -8,7 +8,7 @@ I had to connect to OpenWeatherMap's API's, I used the Current Weather API and t
 
 The current weather is rendered inside of a card when you search for a city, whilst all cards are dynamically constructed for the five day forecast.
 
-I have also used local storage to store recently searched cities.
+I have also used local storage to store recently searched cities, you can click one of the cities to bring up weather information for that city.
 
 ## Screenshots
 
