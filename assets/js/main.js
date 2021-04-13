@@ -70,7 +70,7 @@ const constructFiveDay = (currentOneCall) => {
     $("#fiveDayForecastCards")
       .append(`<div class="fiveDayConstruction"><div class="card forecastDayCard" style="width: 15rem">
     <img
-      src="http://openweathermap.org/img/wn/${
+      src="https://openweathermap.org/img/wn/${
         currentOneCall.daily[index].weather[0].icon
       }@2x.png"
       class="card-img-top weatherImage mx-auto"
@@ -92,13 +92,13 @@ const constructFiveDay = (currentOneCall) => {
 
 //This function includes the fetch functions for the current weather API and the OneCall API. They both feature dynamic parameters based on user input.The date is also converted here to a readable format.
 async function fetchAllWeatherData(cityName) {
-  const weatherApiUrl = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${API_KEY}&units=metric`;
+  const weatherApiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${API_KEY}&units=metric`;
   const response = await fetch(weatherApiUrl);
   const data = await response.json();
   let iconCode = data.weather[0].icon;
   const date = new Date(data.dt * 1000).toLocaleDateString("en-gb");
   const icon = await fetch(
-    `http://openweathermap.org/img/wn/${iconCode}@2x.png`
+    `https://openweathermap.org/img/wn/${iconCode}@2x.png`
   );
   requestedData = {
     name: data.name,
