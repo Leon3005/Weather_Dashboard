@@ -25,15 +25,17 @@
     </header>
     <!-- Search Bar with input -->
     <div id="searchBar" class="m-4">
-      <h2>Enter a city:</h2>
-      <div class="input-group">
-        <div class="form-outline">
-          <input type="search" id="form1" class="form-control" />
+      <form id="search-form">
+        <h2>Enter a city:</h2>
+        <div class="input-group">
+          <div class="form-outline">
+            <input type="search" id="form1" class="form-control" />
+          </div>
+          <button type="button" id="searchButton" class="btn btn-primary">
+            <i class="fas fa-search"></i>
+          </button>
         </div>
-        <button type="button" id="searchButton" class="btn btn-primary">
-          <i class="fas fa-search"></i>
-        </button>
-      </div>
+      </form>
     </div>
 
     <!-- Recently selected cities -->
